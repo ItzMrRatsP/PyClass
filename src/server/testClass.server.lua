@@ -2,7 +2,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TextChatService = game:GetService("TextChatService")
-local PyScript = require(ReplicatedStorage.PyScript)
+local PyScript = require(ReplicatedStorage.PyClass)
 
 local Cash = PyScript:import("PlayerMoney", 400)
 local killAll = PyScript:import("KillAll")
@@ -32,7 +32,7 @@ end)
 
 MarketplaceService.ProcessReceipt = function(Receipt: { [string]: any })
 	for _, player in Players:GetPlayers() do
-		print(player.Name)
+		-- print(player.Name)
 		killAll.add_player(player)
 	end
 

@@ -1,5 +1,5 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local PyScript = require(ReplicatedStorage.PyScript)
+local PyScript = require(ReplicatedStorage.PyClass)
 
 PyScript:new("KillAll", {
 	__init__ = function(self)

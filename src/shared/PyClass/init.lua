@@ -18,7 +18,10 @@ pyScript.classes = {}
 pyScript.classAdded = LemonSignal.new()
 
 function pyScript.range(min: number, max: number): { number }
-	assert(typeof(min) == "number" and typeof(max) == "number", "min and max needs to be number type!")
+	assert(
+		typeof(min) == "number" and typeof(max) == "number",
+		"min and max needs to be number type!"
+	)
 
 	local t = {}
 
@@ -56,9 +59,7 @@ function pyScript.array(self: { any }): { any } & Array
 		local keysTable = {}
 
 		for key, _ in arr do
-			if table.find(keysTable, key) then
-				continue
-			end
+			if table.find(keysTable, key) then continue end
 			table.insert(keysTable, key)
 		end
 
@@ -71,9 +72,7 @@ function pyScript.array(self: { any }): { any } & Array
 
 	function methods.find(value)
 		for i, v in arr do
-			if v ~= value then
-				continue
-			end
+			if v ~= value then continue end
 
 			return i
 		end
@@ -95,8 +94,14 @@ end
 
 function pyScript:new(name: string?, functions)
 	assert(name, "Name must be an string!")
-	assert(not self.classes[name], `Name must be unique string, Seems like {name} is already taken.`)
-	assert(functions.__init__, "__init__ function must be included in the class")
+	assert(
+		not self.classes[name],
+		`Name must be unique string, Seems like {name} is already taken.`
+	)
+	assert(
+		functions.__init__,
+		"__init__ function must be included in the class"
+	)
 
 	local classWrapper = setmetatable({}, {
 		__index = functions,
@@ -123,9 +128,7 @@ function pyScript:import(className: string, ...)
 		return self.classes[className]
 	end)
 		:andThen(function(Class)
-			if Class then
-				return Class
-			end
+			if Class then return Class end
 			return Promise.fromEvent(self.classAdded)
 		end)
 		:andThen(function(Class)

@@ -10,13 +10,6 @@
         "ServerScriptService": {
             "$path": "src/server",
             "$ignoreUnknownInstances": true
-        },
-
-        "StarterPlayer": {
-            "StarterPlayerScripts": {
-                "$path": "src/client",
-                "$ignoreUnknownInstances": true
-            }
         }
     }
 }

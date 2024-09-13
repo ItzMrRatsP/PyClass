@@ -118,7 +118,7 @@ function pyScript:new(name: string?, functions)
 	end
 
 	self.classes[name] = classWrapper
-	self.classAdded:Fire(self.classes[name])
+	self.classAdded:Fire(classWrapper)
 end
 
 function pyScript:import(className: string, ...)

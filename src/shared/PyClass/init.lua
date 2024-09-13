@@ -103,17 +103,18 @@ function pyScript:new(name: string?, functions)
 		"__init__ function must be included in the class"
 	)
 
+	-- @Description: This will run .__init__ method in all the class functions
 	local classWrapper = setmetatable({}, {
 		__index = functions,
-		__call = function(_, ...)
+		__call = function(...)
 			functions.__init__(...)
 			return functions
 		end,
 	})
 
-	for index, func in functions do
+	for index, method in functions do
 		functions[index] = function(...)
-			return func(classWrapper, ...) -- call function with self and arguments
+			return method(classWrapper, ...) -- call function with self and arguments
 		end
 	end
 

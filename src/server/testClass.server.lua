@@ -1,11 +1,9 @@
-local MarketplaceService = game:GetService("MarketplaceService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TextChatService = game:GetService("TextChatService")
 local PyScript = require(ReplicatedStorage.PyClass)
 
 local Cash = PyScript:import("PlayerMoney", 400)
-local killAll = PyScript:import("KillAll")
 
 for _, Player in Players:GetPlayers() do
 	Cash.add_player(Player)
@@ -29,12 +27,3 @@ Test.Triggered:Connect(function(Source: TextSource, Message: string)
 	if not Target or not Player then return end
 	Cash.give(Player, Target, Money)
 end)
-
-MarketplaceService.ProcessReceipt = function(Receipt: { [string]: any })
-	for _, player in Players:GetPlayers() do
-		-- print(player.Name)
-		killAll.add_player(player)
-	end
-
-	killAll.apply()
-end

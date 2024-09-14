@@ -106,7 +106,7 @@ function pyScript:new(name: string?, functions)
 	-- @Description: This will run .__init__ method in all the class functions
 	local classWrapper = setmetatable({}, {
 		__index = functions,
-		__call = function(...)
+		__call = function(_, ...)
 			functions.__init__(...)
 			return functions
 		end,
@@ -124,7 +124,7 @@ function pyScript:new(name: string?, functions)
 end
 
 function pyScript:import(className: string, ...)
-	local arguments = table.pack(...)
+	local arguments = { ... }
 
 	return Promise.try(function()
 		return self.classes[className]

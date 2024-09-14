@@ -113,6 +113,7 @@ function pyScript:new(name: string?, functions)
 	})
 
 	for index, method in functions do
+		if typeof(method) ~= "function" then continue end
 		functions[index] = function(...)
 			return method(classWrapper, ...) -- call function with self and arguments
 		end
